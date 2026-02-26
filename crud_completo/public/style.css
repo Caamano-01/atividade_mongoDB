@@ -1,0 +1,112 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #4e73df, #1cc88a);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container principal */
+.container {
+  background: #ffffff;
+  padding: 30px;
+  width: 450px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Formulário */
+.form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.3s;
+  margin: 10px;
+}
+
+input:focus {
+  border-color: #4e73df;
+  outline: none;
+  box-shadow: 0 0 5px rgba(78, 115, 223, 0.5);
+}
+
+/* Botão principal */
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #4e73df;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #2e59d9;
+}
+
+/* Lista */
+ul {
+  list-style: none;
+}
+
+li {
+  background: #f8f9fc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+}
+h3{
+    margin: 20px;
+}
+
+/* Botões editar/excluir */
+li button {
+  margin-left: 5px;
+  padding: 5px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+li button:first-of-type {
+  background-color: #f6c23e;
+}
+
+li button:first-of-type:hover {
+  background-color: #dda20a;
+}
+
+li button:last-of-type {
+  background-color: #e74a3b;
+}
+
+li button:last-of-type:hover {
+  background-color: #c0392b;
+}
