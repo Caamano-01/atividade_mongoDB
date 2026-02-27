@@ -6,14 +6,20 @@ async function carregar() {
     const pessoas = await res.json();
 
     const lista = document.getElementById("lista");
+    const contador = document.getElementById("contador"); // Referência ao contador
+    
     lista.innerHTML = "";
+    contador.innerText = pessoas.length; // Atualiza o número total
 
     pessoas.forEach(p => {
+      // Nota: Adicionei uma verificação para o telefone caso ele não venha do banco
+      const tel = p.telefone || "Sem telefone"; 
+      
       lista.innerHTML += `
         <li>
-          <span><strong>${p.nome}</strong> - ${p.email} - ${p.telefone}</span>
+          <span><strong>${p.nome}</strong> - ${p.email} - ${tel}</span>
           <div>
-            <button onclick="editar('${p._id}', '${p.nome}', '${p.email}', '${p.telefone}')">Editar</button>
+            <button onclick="editar('${p._id}', '${p.nome}', '${p.email}', '${tel}')">Editar</button>
             <button onclick="deletar('${p._id}')">Excluir</button>
           </div>
         </li>
@@ -30,33 +36,43 @@ async function salvar() {
   const email = document.getElementById("email").value;
   const telefone = document.getElementById("telefone").value;
 
+  // validação de preenchimento
   if (!nome || !email || !telefone) {
     alert("Preencha todos os campos!");
     return;
   }
 
+  // uso da sua função de validação
+  if (!validarDados(nome, email)) {
+    return; 
+  }
+
   const dados = { nome, email, telefone };
 
   try {
+    let response;
     if (id) {
       // Atualizar
-      await fetch(`${api}/${id}`, {
+      response = await fetch(`${api}/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
       });
+      if (response.ok) alert("Registro atualizado com sucesso!");
     } else {
       // Criar novo
-      await fetch(api, {
+      response = await fetch(api, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dados)
       });
+      if (response.ok) alert("Pessoa cadastrada com sucesso!");
     }
 
     limpar();
     carregar();
   } catch (error) {
+    alert("Erro ao salvar os dados. Verifique o console.");
     console.error("Erro ao salvar:", error);
   }
 }
